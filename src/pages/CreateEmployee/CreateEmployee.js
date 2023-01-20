@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./CreateEmployee.css";
 
 export default function CreateEmployeeclass() {
     const handleSubmit = (e) => {
@@ -6,65 +7,60 @@ export default function CreateEmployeeclass() {
     }
 
     return (
-        <>
-            <div className="title">
+        <div className="create">
+            <div className="create__title">
                 <h1>HRnet</h1>
             </div>
-            <div className="container">
+            <div>
                 <Link to="/list">View Current Employees</Link>
                 <h2>Create Employee</h2>
-                <form onSubmit={(e) => handleSubmit(e)} id="create-employee">
-                    <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name" />
+                <form onSubmit={(e) => handleSubmit(e)} >
 
-                    <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name" />
+                    <div className='create__info'>
+                        <label htmlFor="first-name">First Name</label>
+                        <input type="text" id="first-name" className="create__info__input" />
 
-                    <label htmlFor="date-of-birth">Date of Birth</label>
-                    <input id="date-of-birth" type="text" />
+                        <label htmlFor="last-name">Last Name</label>
+                        <input type="text" id="last-name" className="create__info__input" />
 
-                    <label htmlFor="start-date">Start Date</label>
-                    <input id="start-date" type="text" />
+                        <label htmlFor="date-of-birth">Date of Birth</label>
+                        <input id="date-of-birth" type="text" className="create__info__input" />
 
-                    <fieldset className="address">
-                        <legend>Address</legend>
+                        <label htmlFor="start-date">Start Date</label>
+                        <input id="start-date" type="text" className="create__info__input" />
+                    </div>
+
+                    <div className="create__address">
+                        <p className="create__address__title">Address</p>
 
                         <label htmlFor="street">Street</label>
-                        <input id="street" type="text" />
+                        <input id="street" type="text" className="create__address__input" />
 
                         <label htmlFor="city">City</label>
-                        <input id="city" type="text" />
+                        <input id="city" type="text" className="create__address__input" />
 
                         <label htmlFor="state">State</label>
-                        <select name="state" id="state"></select>
+                        <select name="state" id="state" className="create__address__input" ></select>
 
                         <label htmlFor="zip-code">Zip Code</label>
-                        <input id="zip-code" type="number" />
-                    </fieldset>
+                        <input id="zip-code" type="number" className="create__address__input" />
+                    </div>
 
-                    <label htmlFor="department">Department</label>
-                    <select name="department" id="department">
-                        <option>Sales</option>
-                        <option>Marketing</option>
-                        <option>Engineering</option>
-                        <option>Human Resources</option>
-                        <option>Legal</option>
-                    </select>
+                    <div className="create__address__department">
+                        <label htmlFor="department">Department</label>
+                        <select name="department" id="department">
+                            <option>Sales</option>
+                            <option>Marketing</option>
+                            <option>Engineering</option>
+                            <option>Human Resources</option>
+                            <option>Legal</option>
+                        </select>
+                        <button>Save</button>
+                    </div>
                 </form>
 
-                <button>Save</button>
             </div>
-            <div id="confirmation" className="modal">Employee Created!</div>
-
-
-            <div>
-                <fieldset className="address">
-                    <legend>Address</legend>
-
-                    <label htmlFor="street">Street</label>
-                    <input id="street" type="text" />
-                </fieldset>
-            </div>
-        </>
+            {/* <div id="confirmation" className="modal">Employee Created!</div> */}
+        </div>
     );
 }

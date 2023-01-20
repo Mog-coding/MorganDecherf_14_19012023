@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CreateEmployee from './pages/CreateEmployee/CreateEmployee'
+import CreateEmployee from './pages/CreateEmployee/CreateEmployee';
 import EmployeeList from './pages/EmployeeList/EmployeeList';
+import "./index.css";
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,0 +1,40 @@
+.create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create__info {
+    display: flex;
+    flex-direction: column;
+}
+.create__info__input {
+    margin-bottom: 20px;
+}
+
+.create__address {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 10px;
+    background-color: #EAF2FF;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.create__address__title {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    top: -25px;
+}
+.create__address__input {
+    margin-bottom: 20px;
+    z-index: 3;
+}
+
+.create__address__department {
+    display: flex;
+    flex-direction: column;
+}
