@@ -4,17 +4,25 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateEmployee from './pages/CreateEmployee/CreateEmployee';
 import EmployeeList from './pages/EmployeeList/EmployeeList';
 import "./index.css";
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { adressReducer } from './reducer/adressReducer';
 // import reportWebVitals from './reportWebVitals';
+
+const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const store = createStore(adressReducer, reduxDevtools)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   //<React.StrictMode>
-  <Router>
-    <Routes>
-      <Route path="/" element={<CreateEmployee />} />
-      <Route path="/list" element={<EmployeeList />} />
-    </Routes>
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <Routes>
+        <Route path="/" element={<CreateEmployee />} />
+        <Route path="/list" element={<EmployeeList />} />
+      </Routes>
+    </Router>
+  </Provider>
   //</React.StrictMode>
 );
 

@@ -1,6 +1,11 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function EmployeeList() {
+
+    const firstName = useSelector( state => state.firstName);
+
+
 
     return (
         <>
@@ -8,6 +13,7 @@ export default function EmployeeList() {
                 <h1>Current Employees</h1>
                 <table id="employee-table" className="display"></table>
                 <Link to="/">Home</Link>
+                <div>firstName:{firstName}</div>
             </div>
         </>
     )

@@ -1,10 +1,21 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { saisie } from "../../actions/adressActions";
 import "./CreateEmployee.css";
 
 export default function CreateEmployeeclass() {
+    const dispatch = useDispatch();
+    const [firstName, setFirstName] = useState('');
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        dispatch(saisie(firstName))
+
     }
+
+
 
     return (
         <div className="create">
@@ -18,7 +29,11 @@ export default function CreateEmployeeclass() {
 
                     <div className='create__info'>
                         <label htmlFor="first-name">First Name</label>
-                        <input type="text" id="first-name" className="create__info__input" />
+                        <input type="text" id="first-name" className="create__info__input" 
+                            onChange={(e) => {
+                                setFirstName(e.target.value)
+                            }}
+                        />
 
                         <label htmlFor="last-name">Last Name</label>
                         <input type="text" id="last-name" className="create__info__input" />
