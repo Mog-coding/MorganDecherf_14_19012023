@@ -1,5 +1,26 @@
+body,
+html,
+#root {
+    height: 100%;
+}
+
 body {
-    max-width: 1440px;
-    margin: auto;
+    margin: 0;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+* {
     box-sizing: border-box;
+}
+
+* {
+    --main-color: #CEDA97;
+    --secondary-color: #F5F5F5;
+    --tertiary-color: #586F07;
+    --light-text-color: #74798c;
 }
