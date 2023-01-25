@@ -7,6 +7,8 @@ import "./index.css";
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { adressReducer } from './reducer/adressReducer';
+import Header from './components/Header/Header';
+import Home from './pages/Home/Home';
 // import reportWebVitals from './reportWebVitals';
 
 const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -14,16 +16,18 @@ const store = createStore(adressReducer, reduxDevtools)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  //<React.StrictMode>
-  <Provider store={store}>
-    <Router>
-      <Routes>
-        <Route path="/" element={<CreateEmployee />} />
-        <Route path="/list" element={<EmployeeList />} />
-      </Routes>
-    </Router>
-  </Provider>
-  //</React.StrictMode>
+    //<React.StrictMode>
+    <Provider store={store}>
+        <Router>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/create" element={<CreateEmployee />} />
+                <Route path="/list" element={<EmployeeList />} />
+            </Routes>
+        </Router>
+    </Provider>
+    //</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
