@@ -1,5 +1,5 @@
 const initialState = {
-    firstName: "validax"
+    firstName: "gerard"
 }
 
 export const adressReducer = ( state = initialState, action) => {
