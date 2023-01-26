@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { saisie } from '../../actions/adressActions';
 import './CreateEmployee.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function CreateEmployeeclass() {
     const dispatch = useDispatch();
     const [firstName, setFirstName] = useState('');
+    const [birthDate, setBirthDate] = useState('');
+    const [startDate, setStartDate] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,14 +39,20 @@ export default function CreateEmployeeclass() {
                     />
                     <div className="create__info__datePicker">
                         <label className="create__label">Date of Birth</label>
-
+                        <DatePicker
+                            selected={birthDate}
+                            onChange={(date) => setBirthDate(date)}
+                            className="datePickerCustom"
+                            placeholderText={"Click to select a date"}
+                        />
                     </div>
                     <label htmlFor="start-date" className="create__label">Start Date</label>
-                    <input
-                        id="start-date"
-                        type="text"
-                        className="create__input"
-                    />
+                    <DatePicker
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                            className="datePickerCustom"
+                            placeholderText={"Click to select a date"}
+                        />
                     <div className="create__info__department">
                         <label htmlFor="department" className="create__label">Department</label>
                         <select name="department" id="department">
