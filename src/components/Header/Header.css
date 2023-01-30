@@ -44,6 +44,7 @@
     margin: 0px;
     font-weight: bold;
     font-size: 2em;
+    color: var(--tertiary-color)
 }
 
 .header__menu {
