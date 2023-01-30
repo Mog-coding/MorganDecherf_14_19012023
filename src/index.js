@@ -6,13 +6,13 @@ import EmployeeList from './pages/EmployeeList/EmployeeList';
 import "./index.css";
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { adressReducer } from './reducer/adressReducer';
+import { reducer } from './reducer/reducer';
 import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
 // import reportWebVitals from './reportWebVitals';
 
 const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-const store = createStore(adressReducer, reduxDevtools)
+const store = createStore(reducer, reduxDevtools)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

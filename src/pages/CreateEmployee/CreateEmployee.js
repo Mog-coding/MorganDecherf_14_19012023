@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { saisie } from '../../actions/adressActions';
+import { createEmployeeAction } from '../../actions/createEmployeeActions';
 import './CreateEmployee.css';
 //react-datepicker
 import DatePicker from 'react-datepicker';
@@ -9,23 +9,44 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 //data
 import { StatesModel } from '../../model/statesModel';
-import { statesData } from '../../utils/statesData.js';
+import { statesData } from '../../utils/statesData';
+import { departmentData } from '../../utils/departmentData';
 
 export default function CreateEmployeeclass() {
     const dispatch = useDispatch();
-    const [firstName, setFirstName] = useState('');
-    const [birthDate, setBirthDate] = useState('');
-    const [startDate, setStartDate] = useState('');
 
-    const [selectedOption, setSelectedOption] = useState(null);
+    //input
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [street, setStreet] = useState('');
+    const [city, setCity] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    //datePicker
+    const [startDate, setStartDate] = useState('');
+    const [birthDate, setBirthDate] = useState('');
+    //reactSelect
+    const [selectedDepartment, setSelectedDepartment] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(saisie(firstName));
+        dispatch(
+            createEmployeeAction({
+                firstName: firstName,
+                lastName: lastName,
+                startDate: startDate,
+                selectedDepartment: selectedDepartment,
+                birthDate: birthDate,
+                street: street,
+                city: city,
+                selectedState: selectedState,
+                zipCode: zipCode,
+            })
+        );
     };
 
-  const test = new StatesModel(statesData);
-  const options = test.statesData;
+    // react-select states
+    const dataStates = new StatesModel(statesData);
 
     return (
         <main className="create">
@@ -51,6 +72,9 @@ export default function CreateEmployeeclass() {
                         type="text"
                         id="last-name"
                         className="create__input"
+                        onChange={(e) => {
+                            setLastName(e.target.value);
+                        }}
                     />
                     <div className="create__info__datePicker">
                         <label className="create__label">Date of Birth</label>
@@ -74,13 +98,54 @@ export default function CreateEmployeeclass() {
                         <label htmlFor="department" className="create__label">
                             Department
                         </label>
-                        <select name="department" id="department">
-                            <option>Sales</option>
-                            <option>Marketing</option>
-                            <option>Engineering</option>
-                            <option>Human Resources</option>
-                            <option>Legal</option>
-                        </select>
+                        <Select
+                            defaultValue={selectedDepartment}
+                            onChange={setSelectedDepartment}
+                            options={departmentData}
+                            placeholder="Click to select a state"
+                            menuPosition="fixed"
+                            menuPlacement="auto"
+                            styles={{
+                                control: (baseStyles, state) => ({
+                                    ...baseStyles,
+                                    minHeight: '25px',
+                                    fontSize: '14px',
+                                    marginBottom: '20px',
+                                    borderRadius: '5px;',
+                                    '&:hover': {
+                                        border: '2px solid grey',
+                                        boxShadow: 'none',
+                                        outline: 'none',
+                                    },
+                                    border: state.isFocused
+                                        ? '2px solid black'
+                                        : '2px solid rgb(235, 235, 235)',
+                                    boxShadow: state.isFocused ? '' : '',
+                                }),
+                                dropdownIndicator: (base) => ({
+                                    ...base,
+                                    paddingTop: 0,
+                                    paddingBottom: 0,
+                                }),
+                                valueContainer: (base) => ({
+                                    ...base,
+                                    padding: 0,
+                                }),
+                                menuList: (base) => ({
+                                    ...base,
+                                    fontSize: '12px',
+                                }),
+                                option: (provided, state) => ({
+                                    ...provided,
+                                    backgroundColor: state.isSelected
+                                        ? '#586F07'
+                                        : 'white',
+                                    '&:hover': {
+                                        backgroundColor: '#CEDA97',
+                                    },
+                                }),
+                            }}
+                        />
                     </div>
                 </div>
 
@@ -89,21 +154,33 @@ export default function CreateEmployeeclass() {
                     <label htmlFor="street" className="create__label">
                         Street
                     </label>
-                    <input id="street" type="text" className="create__input" />
+                    <input
+                        id="street"
+                        type="text"
+                        className="create__input"
+                        onChange={(e) => setStreet(e.target.value)}
+                    />
+
                     <label htmlFor="city" className="create__label">
                         City
                     </label>
-                    <input id="city" type="text" className="create__input" />
+                    <input
+                        id="city"
+                        type="text"
+                        className="create__input"
+                        onChange={(e) => setCity(e.target.value)}
+                    />
+
                     <label htmlFor="state" className="create__label">
                         State
                     </label>
                     <Select
-                        defaultValue={selectedOption}
-                        onChange={setSelectedOption}
-                        options={options}
-                        placeholder= 'Click to select a state'
-                        menuPosition='fixed'
-                        menuPlacement='auto'
+                        defaultValue={selectedState}
+                        onChange={setSelectedState}
+                        options={dataStates.statesData}
+                        placeholder="Click to select a state"
+                        menuPosition="fixed"
+                        menuPlacement="auto"
                         styles={{
                             control: (baseStyles, state) => ({
                                 ...baseStyles,
@@ -111,13 +188,15 @@ export default function CreateEmployeeclass() {
                                 fontSize: '14px',
                                 marginBottom: '20px',
                                 borderRadius: '5px;',
-                                "&:hover": {
-                                    border: "2px solid grey",
+                                '&:hover': {
+                                    border: '2px solid grey',
                                     boxShadow: 'none',
                                     outline: 'none',
                                 },
-                                border: state.isFocused ? '2px solid black' : '2px solid rgb(235, 235, 235)',
-                                boxShadow: state.isFocused ? "" : "",
+                                border: state.isFocused
+                                    ? '2px solid black'
+                                    : '2px solid rgb(235, 235, 235)',
+                                boxShadow: state.isFocused ? '' : '',
                             }),
                             dropdownIndicator: (base) => ({
                                 ...base,
@@ -134,10 +213,12 @@ export default function CreateEmployeeclass() {
                             }),
                             option: (provided, state) => ({
                                 ...provided,
-                                backgroundColor: state.isSelected ? '#586F07' : 'white',
-                                "&:hover": {
+                                backgroundColor: state.isSelected
+                                    ? '#586F07'
+                                    : 'white',
+                                '&:hover': {
                                     backgroundColor: '#CEDA97',
-                                }
+                                },
                             }),
                         }}
                     />
@@ -148,8 +229,11 @@ export default function CreateEmployeeclass() {
                         id="zip-code"
                         type="number"
                         className="create__input"
+                        onChange={(e) => {
+                            setZipCode(e.target.value);
+                        }}
                     />
-                    <button className="submit_button">Save</button>
+                    <button className="create__submitButton">Save</button>
                 </div>
             </form>
             {/* <div id="confirmation" className="modal">Employee Created!</div> */}
