@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createEmployeeAction } from '../../actions/createEmployeeActions';
 import './CreateEmployee.css';
-//react-datepicker
+// react-datepicker
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-//react-select
+// react-select
 import Select from 'react-select';
-//data
+// picker's data
 import { StatesModel } from '../../model/statesModel';
 import { statesData } from '../../utils/statesData';
 import { departmentData } from '../../utils/departmentData';
@@ -15,16 +15,16 @@ import { departmentData } from '../../utils/departmentData';
 export default function CreateEmployeeclass() {
     const dispatch = useDispatch();
 
-    //input
+    // input
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
     const [zipCode, setZipCode] = useState('');
-    //datePicker
+    // datePicker
     const [startDate, setStartDate] = useState('');
     const [birthDate, setBirthDate] = useState('');
-    //reactSelect
+    // reactSelect
     const [selectedDepartment, setSelectedDepartment] = useState(null);
     const [selectedState, setSelectedState] = useState(null);
 
@@ -42,7 +42,7 @@ export default function CreateEmployeeclass() {
                 selectedState: selectedState,
                 zipCode: zipCode,
             })
-        );
+        )
     };
 
     // react-select states
@@ -238,5 +238,5 @@ export default function CreateEmployeeclass() {
             </form>
             {/* <div id="confirmation" className="modal">Employee Created!</div> */}
         </main>
-    );
+    )
 }
