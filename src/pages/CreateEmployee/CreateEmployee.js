@@ -11,6 +11,48 @@ import Select from 'react-select';
 import { StatesModel } from '../../model/statesModel';
 import { statesData } from '../../utils/statesData';
 import { departmentData } from '../../utils/departmentData';
+import Toto from './Toto';
+
+const selectStyles = {
+    control: (baseStyles, state) => ({
+        ...baseStyles,
+        minHeight: '25px',
+        fontSize: '14px',
+        marginBottom: '20px',
+        borderRadius: '5px;',
+        '&:hover': {
+            border: '2px solid grey',
+            boxShadow: 'none',
+            outline: 'none',
+        },
+        border: state.isFocused
+            ? '2px solid black'
+            : '2px solid rgb(235, 235, 235)',
+        boxShadow: state.isFocused ? '' : '',
+    }),
+    dropdownIndicator: (base) => ({
+        ...base,
+        paddingTop: 0,
+        paddingBottom: 0,
+    }),
+    valueContainer: (base) => ({
+        ...base,
+        padding: 0,
+    }),
+    menuList: (base) => ({
+        ...base,
+        fontSize: '12px',
+    }),
+    option: (provided, state) => ({
+        ...provided,
+        backgroundColor: state.isSelected
+            ? '#586F07'
+            : 'white',
+        '&:hover': {
+            backgroundColor: '#CEDA97',
+        },
+    }),
+}
 
 export default function CreateEmployeeclass() {
     const dispatch = useDispatch();
@@ -45,11 +87,19 @@ export default function CreateEmployeeclass() {
         )
     };
 
+    const clickToto = (value) => {
+        console.log('Click sur Toto : ', value)
+        setFirstName(value)
+    }
+
     // react-select states
     const dataStates = new StatesModel(statesData);
 
     return (
         <main className="create">
+             <Toto onClickToto={clickToto} />
+
+
             <h1>Create Employee</h1>
             <form className="create__form" onSubmit={(e) => handleSubmit(e)}>
                 <div className="create__info">
@@ -105,46 +155,7 @@ export default function CreateEmployeeclass() {
                             placeholder="Click to select a state"
                             menuPosition="fixed"
                             menuPlacement="auto"
-                            styles={{
-                                control: (baseStyles, state) => ({
-                                    ...baseStyles,
-                                    minHeight: '25px',
-                                    fontSize: '14px',
-                                    marginBottom: '20px',
-                                    borderRadius: '5px;',
-                                    '&:hover': {
-                                        border: '2px solid grey',
-                                        boxShadow: 'none',
-                                        outline: 'none',
-                                    },
-                                    border: state.isFocused
-                                        ? '2px solid black'
-                                        : '2px solid rgb(235, 235, 235)',
-                                    boxShadow: state.isFocused ? '' : '',
-                                }),
-                                dropdownIndicator: (base) => ({
-                                    ...base,
-                                    paddingTop: 0,
-                                    paddingBottom: 0,
-                                }),
-                                valueContainer: (base) => ({
-                                    ...base,
-                                    padding: 0,
-                                }),
-                                menuList: (base) => ({
-                                    ...base,
-                                    fontSize: '12px',
-                                }),
-                                option: (provided, state) => ({
-                                    ...provided,
-                                    backgroundColor: state.isSelected
-                                        ? '#586F07'
-                                        : 'white',
-                                    '&:hover': {
-                                        backgroundColor: '#CEDA97',
-                                    },
-                                }),
-                            }}
+                            styles={selectStyles}
                         />
                     </div>
                 </div>
@@ -181,46 +192,7 @@ export default function CreateEmployeeclass() {
                         placeholder="Click to select a state"
                         menuPosition="fixed"
                         menuPlacement="auto"
-                        styles={{
-                            control: (baseStyles, state) => ({
-                                ...baseStyles,
-                                minHeight: '25px',
-                                fontSize: '14px',
-                                marginBottom: '20px',
-                                borderRadius: '5px;',
-                                '&:hover': {
-                                    border: '2px solid grey',
-                                    boxShadow: 'none',
-                                    outline: 'none',
-                                },
-                                border: state.isFocused
-                                    ? '2px solid black'
-                                    : '2px solid rgb(235, 235, 235)',
-                                boxShadow: state.isFocused ? '' : '',
-                            }),
-                            dropdownIndicator: (base) => ({
-                                ...base,
-                                paddingTop: 0,
-                                paddingBottom: 0,
-                            }),
-                            valueContainer: (base) => ({
-                                ...base,
-                                padding: 0,
-                            }),
-                            menuList: (base) => ({
-                                ...base,
-                                fontSize: '12px',
-                            }),
-                            option: (provided, state) => ({
-                                ...provided,
-                                backgroundColor: state.isSelected
-                                    ? '#586F07'
-                                    : 'white',
-                                '&:hover': {
-                                    backgroundColor: '#CEDA97',
-                                },
-                            }),
-                        }}
+                        styles={selectStyles}
                     />
                     <label htmlFor="zip-code" className="create__label">
                         Zip Code
