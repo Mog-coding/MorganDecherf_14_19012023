@@ -648,5 +648,18 @@
         "salary": 10.0,
         "address": "Address10",
         "department": "Human Ressources"
+    },
+    {
+        "id": 839,
+        "imageUrl": "https://hub.dummyapis.com/Image?text=LR&height=120&width=120",
+        "firstName": "Lexie",
+        "lastName": "Rutherford",
+        "email": "Lexie.Rutherford@dummyapis.com",
+        "contactNumber": "4178596048",
+        "age": 78,
+        "dob": "10/04/1945",
+        "salary": 10.0,
+        "address": "Address10",
+        "department": "Legal"
     }
 ]

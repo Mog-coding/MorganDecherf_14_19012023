@@ -17,6 +17,10 @@
 }
 .tableCont__inputCont {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 20px;
+}
+.tableCont__pagination {
+    display: flex;
+    justify-content: space-between;
 }
