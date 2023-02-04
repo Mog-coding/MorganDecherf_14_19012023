@@ -8,9 +8,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 // react-select
 import Select from 'react-select';
 // picker's data
-import { StatesModel } from '../../model/statesModel';
-import { statesData } from '../../utils/statesData';
-import { departmentData } from '../../utils/departmentData';
+import { statesModel } from '../../model/statesModel';
+import { statesData } from '../../data/statesData';
+import { departmentData } from '../../data/departmentData';
 import Toto from './Toto';
 
 const selectStyles = {
@@ -93,7 +93,8 @@ export default function CreateEmployeeclass() {
     }
 
     // react-select states
-    const dataStates = new StatesModel(statesData);
+    const dataStates = statesModel(statesData);
+
 
     return (
         <main className="create">
@@ -188,7 +189,7 @@ export default function CreateEmployeeclass() {
                     <Select
                         defaultValue={selectedState}
                         onChange={setSelectedState}
-                        options={dataStates.statesData}
+                        options={dataStates}
                         placeholder="Click to select a state"
                         menuPosition="fixed"
                         menuPlacement="auto"
