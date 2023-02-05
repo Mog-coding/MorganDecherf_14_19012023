@@ -3,12 +3,23 @@ import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import './Table.css';
 
 export function Table({ columns, data }) {
-    const {
+    const props = useTable(
+        {
+          columns,
+          data
+        },
+        useGlobalFilter,
+        usePagination
+      );
+
+      const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        prepareRow,
         rows,
+        prepareRow,
+        setGlobalFilter,
+        state,
         page,
         canPreviousPage,
         canNextPage,
@@ -18,17 +29,8 @@ export function Table({ columns, data }) {
         nextPage,
         previousPage,
         setPageSize,
-        setGlobalFilter,
-        state: { pageIndex, pageSize },
-    } = useTable(
-        {
-            columns,
-            data,
-            initialState: { pageIndex: 1 },
-        },
-        useGlobalFilter,
-        usePagination
-    );
+        state: { pageIndex, pageSize, globalFilter }
+      } = props;
 
     const handleFilterInputChange = (e) => {
         const { value } = e.currentTarget;
@@ -101,7 +103,7 @@ export function Table({ columns, data }) {
                               ' to ' +
                               (page.length + pageIndex * pageSize) +
                               ' of ' +
-                              data.length
+                              rows.length
                             : ' 0 '}{' '}
                         entries
                     </p>
