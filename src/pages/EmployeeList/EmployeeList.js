@@ -3,8 +3,15 @@ import React, { useMemo } from 'react';
 import { Table } from '../../components/Table/Table.js';
 // import makeData from "./makeData";
 import employeeList from '../../data/employeeList.json';
+import { useSelector } from "react-redux";
 
 export default function EmployeeList() {
+
+    const employee = useSelector( state => state);
+    console.log("redux", employee)
+
+
+
     const employeeFormat = (employeeList) => {
         return employeeList.map((el) => {
             return {

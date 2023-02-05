@@ -1,3 +1,3 @@
 export const createEmployeeAction = (employeeData) => {
-    return { type: 'CREATE_EMPLOYEE', employeeData: employeeData };
+    return { type: 'CREATE_EMPLOYEE', payload: employeeData };
 }
