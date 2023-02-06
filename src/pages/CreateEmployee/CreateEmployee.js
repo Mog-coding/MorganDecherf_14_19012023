@@ -11,9 +11,8 @@ import Select from 'react-select';
 import { statesModel } from '../../model/statesModel';
 import { statesData } from '../../data/statesData';
 import { departmentData } from '../../data/departmentData';
-import Toto from './Toto';
 
-const selectStyles = {
+const selectStylesFactorization = {
     control: (baseStyles, state) => ({
         ...baseStyles,
         minHeight: '25px',
@@ -54,7 +53,7 @@ const selectStyles = {
     }),
 }
 
-export default function CreateEmployeeclass() {
+export default function CreateEmployee() {
     const dispatch = useDispatch();
 
     // input
@@ -87,20 +86,12 @@ export default function CreateEmployeeclass() {
         )
     };
 
-    const clickToto = (value) => {
-        console.log('Click sur Toto : ', value)
-        setFirstName(value)
-    }
-
     // react-select states
     const dataStates = statesModel(statesData);
 
 
     return (
         <main className="create">
-             <Toto onClickToto={clickToto} />
-
-
             <h1>Create Employee</h1>
             <form className="create__form" onSubmit={(e) => handleSubmit(e)}>
                 <div className="create__info">
@@ -156,7 +147,7 @@ export default function CreateEmployeeclass() {
                             placeholder="Click to select a state"
                             menuPosition="fixed"
                             menuPlacement="auto"
-                            styles={selectStyles}
+                            styles={selectStylesFactorization}
                         />
                     </div>
                 </div>
@@ -193,7 +184,7 @@ export default function CreateEmployeeclass() {
                         placeholder="Click to select a state"
                         menuPosition="fixed"
                         menuPlacement="auto"
-                        styles={selectStyles}
+                        styles={selectStylesFactorization}
                     />
                     <label htmlFor="zip-code" className="create__label">
                         Zip Code
