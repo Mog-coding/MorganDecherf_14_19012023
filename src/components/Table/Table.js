@@ -1,6 +1,7 @@
 import React from 'react';
-import { useTable, usePagination, useGlobalFilter } from 'react-table';
+import { useTable, usePagination, useGlobalFilter, useSortBy } from 'react-table';
 import './Table.css';
+import sortIcon from '../../assets/icons/sort-solid.svg';
 
 export function Table({ columns, data }) {
     const props = useTable(
@@ -9,7 +10,8 @@ export function Table({ columns, data }) {
           data
         },
         useGlobalFilter,
-        usePagination
+        useSortBy,
+        usePagination,
       );
 
       const {
@@ -29,7 +31,7 @@ export function Table({ columns, data }) {
         nextPage,
         previousPage,
         setPageSize,
-        state: { pageIndex, pageSize, globalFilter }
+        state: { pageIndex, pageSize }
       } = props;
 
     const handleFilterInputChange = (e) => {
@@ -69,8 +71,16 @@ export function Table({ columns, data }) {
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps()}>
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                         {column.render('Header')}
+                                        <span>
+                                            {column.isSorted
+                                            ? column.isSortedDesc
+                                        ? ' 🔽'
+                                        : ' 🔼'
+                                        : <img className="tableCont__sortIcon"src={sortIcon} alt='' />
+                                    }
+                                        </span>
                                     </th>
                                 ))}
                             </tr>
@@ -125,7 +135,7 @@ export function Table({ columns, data }) {
                             go to page:{' '}
                             <input
                                 type="number"
-                                defaultValue={pageIndex + 1}
+                                placeholder={pageIndex + 1}
                                 onChange={(e) => {
                                     const page = e.target.value
                                         ? Number(e.target.value) - 1

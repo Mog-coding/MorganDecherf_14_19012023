@@ -24,3 +24,6 @@
     display: flex;
     justify-content: space-between;
 }
+.tableCont__sortIcon {
+    filter: invert(41%) sepia(4%) saturate(8%) hue-rotate(5deg) brightness(92%) contrast(90%);
+}
