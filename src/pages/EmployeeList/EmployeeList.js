@@ -1,29 +1,26 @@
-import React, { useMemo } from 'react';
-// import "./styles.css";
+import React from 'react';
+import "./EmployeeList.css";
 import { Table } from '../../components/Table/Table.js';
-// import makeData from "./makeData";
-import employeeList from '../../data/employeeList.json';
 import { useSelector } from "react-redux";
+import { dateFormat } from '../../utils/dateFormat';
 
 export default function EmployeeList() {
 
-    const employee = useSelector( state => state);
-    console.log("redux", employee)
+    const employeesList = useSelector(state => state.employees);
 
-
-
-    const employeeFormat = (employeeList) => {
+    const reduxFormat = (employeeList) => {
+        console.log("redux employeeList: ", employeeList)
         return employeeList.map((el) => {
             return {
                 col1: el.firstName,
                 col2: el.lastName,
-                col3: el.dob,
-                col4: el.department,
-                col5: el.dob,
-                col6: el.address,
-                col7: 'Alabama',
-                col8: 'AL',
-                col9: el.id,
+                col3: dateFormat(el.startDate),
+                col4: el.selectedDepartment.value,
+                col5: dateFormat(el.birthDate),
+                col6: el.street,
+                col7: el.city,
+                col8: el.selectedState.value,
+                col9: el.zipCode,
             };
         });
     };
@@ -32,7 +29,7 @@ export default function EmployeeList() {
         () => [
             {
                 Header: 'First Name',
-                accessor: 'col1', // accessor is the "key" in the data
+                accessor: 'col1',
             },
             {
                 Header: 'Last Name',
@@ -70,10 +67,17 @@ export default function EmployeeList() {
         []
     );
 
+    //data -> employeeMockModel(employeeListMock) OU employeesList
     const data = React.useMemo(
-        () => employeeFormat(employeeList),
+        () => reduxFormat(employeesList),
         []
     );
 
-    return <Table columns={columns} data={data} />
+    return (
+        <main className="employeeList">
+            <h1>Employees list</h1>
+            <button></button>
+            <Table columns={columns} data={data} />
+        </main>
+    )
 }
