@@ -1,27 +1,31 @@
 import React from 'react';
-import { useTable, usePagination, useGlobalFilter, useSortBy } from 'react-table';
+import {
+    useTable,
+    usePagination,
+    useGlobalFilter,
+    useSortBy,
+} from 'react-table';
 import './Table.css';
 import sortIcon from '../../assets/icons/sort-solid.svg';
 
 export function Table({ columns, data }) {
     const props = useTable(
         {
-          columns,
-          data
+            columns,
+            data,
         },
         useGlobalFilter,
         useSortBy,
-        usePagination,
-      );
+        usePagination
+    );
 
-      const {
+    const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         rows,
         prepareRow,
         setGlobalFilter,
-        state,
         page,
         canPreviousPage,
         canNextPage,
@@ -31,8 +35,8 @@ export function Table({ columns, data }) {
         nextPage,
         previousPage,
         setPageSize,
-        state: { pageIndex, pageSize }
-      } = props;
+        state: { pageIndex, pageSize },
+    } = props;
 
     const handleFilterInputChange = (e) => {
         const { value } = e.currentTarget;
@@ -55,7 +59,6 @@ export function Table({ columns, data }) {
                             </option>
                         ))}
                     </select>
-
                     <div>
                         <label htmlFor="search">Search</label>
                         <input
@@ -71,15 +74,26 @@ export function Table({ columns, data }) {
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                    <th
+                                        {...column.getHeaderProps(
+                                            column.getSortByToggleProps()
+                                        )}
+                                    >
                                         {column.render('Header')}
                                         <span>
-                                            {column.isSorted
-                                            ? column.isSortedDesc
-                                        ? ' 🔽'
-                                        : ' 🔼'
-                                        : <img className="tableCont__sortIcon"src={sortIcon} alt='' />
-                                    }
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    ' 🔽'
+                                                ) : (
+                                                    ' 🔼'
+                                                )
+                                            ) : (
+                                                <img
+                                                    className="tableCont__sortIcon"
+                                                    src={sortIcon}
+                                                    alt=""
+                                                />
+                                            )}
                                         </span>
                                     </th>
                                 ))}
@@ -87,20 +101,26 @@ export function Table({ columns, data }) {
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
-                        {page.map((row, i) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>
-                                                {cell.render('Cell')}
-                                            </td>
-                                        );
-                                    })}
-                                </tr>
-                            );
-                        })}
+                        {rows.length === 0 ? (
+                            <tr>
+                                <td colSpan="9" className="tableCont__empty">No data avaible in table</td>
+                            </tr>
+                        ) : (
+                            page.map((row, i) => {
+                                prepareRow(row);
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => {
+                                            return (
+                                                <td {...cell.getCellProps()}>
+                                                    {cell.render('Cell')}
+                                                </td>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })
+                        )}
                     </tbody>
                 </table>
 
@@ -167,5 +187,5 @@ export function Table({ columns, data }) {
                 </div>
             </div>
         </>
-    )
+    );
 }
