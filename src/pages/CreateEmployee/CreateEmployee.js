@@ -11,7 +11,9 @@ import Select from 'react-select';
 import { statesModel } from '../../model/statesModel';
 import { statesData } from '../../data/statesData';
 import { departmentData } from '../../data/departmentData';
+import { ModalComp } from '@morgand/modal-react';
 
+// react-select options factorization
 const selectStylesFactorization = {
     control: (baseStyles, state) => ({
         ...baseStyles,
@@ -44,19 +46,17 @@ const selectStylesFactorization = {
     }),
     option: (provided, state) => ({
         ...provided,
-        backgroundColor: state.isSelected
-            ? '#586F07'
-            : 'white',
+        backgroundColor: state.isSelected ? '#586F07' : 'white',
         '&:hover': {
             backgroundColor: '#CEDA97',
         },
     }),
-}
+};
 
 export default function CreateEmployee() {
     const dispatch = useDispatch();
 
-    // input
+    // inputs
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [street, setStreet] = useState('');
@@ -68,6 +68,10 @@ export default function CreateEmployee() {
     // reactSelect
     const [selectedDepartment, setSelectedDepartment] = useState(null);
     const [selectedState, setSelectedState] = useState(null);
+    const [isSubscribed, setIsSubscribed] = useState(false);
+
+    // react-select states data
+    const dataStates = statesModel(statesData);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -83,15 +87,17 @@ export default function CreateEmployee() {
                 selectedState: selectedState,
                 zipCode: zipCode,
             })
-        )
+        );
+        setIsSubscribed(true);
     };
 
-    // react-select states
-    const dataStates = statesModel(statesData);
-
+    const closeModal = () => {
+        setIsSubscribed(false);
+    };
 
     return (
         <main className="create">
+            {isSubscribed && <ModalComp onClose={closeModal} />}
             <h1>Create Employee</h1>
             <form className="create__form" onSubmit={(e) => handleSubmit(e)}>
                 <div className="create__info">
@@ -200,7 +206,6 @@ export default function CreateEmployee() {
                     <button className="create__submitButton">Save</button>
                 </div>
             </form>
-            {/* <div id="confirmation" className="modal">Employee Created!</div> */}
         </main>
-    )
+    );
 }
