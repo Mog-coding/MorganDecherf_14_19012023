@@ -7,19 +7,14 @@ import { dateFormat } from '../../utils/dateFormat';
 export default function EmployeeList() {
     const employeesList = useSelector((state) => state.employees);
 
-    const reduxFormat = (employeeList) => {
-        console.log('redux employeeList: ', employeeList);
+    const tableDataFormat = (employeeList) => {
         return employeeList.map((el) => {
             return {
-                col1: el.firstName,
-                col2: el.lastName,
-                col3: el.startDate ? dateFormat(el.startDate) : '',
-                col4: el.selectedDepartment ? el.selectedDepartment.value : '',
-                col5: el.birthDate ? dateFormat(el.birthDate) : '',
-                col6: el.street,
-                col7: el.city,
-                col8: el.selectedState ? el.selectedState.value : '',
-                col9: el.zipCode,
+                ...el,
+                startDate: el.startDate ? dateFormat(el.startDate) : '',
+                selectedDepartment: el.selectedDepartment ? el.selectedDepartment.value : '',
+                birthDate: el.birthDate ? dateFormat(el.birthDate) : '',
+                selectedState: el.selectedState ? el.selectedState.value : '',
             };
         });
     };
@@ -28,46 +23,46 @@ export default function EmployeeList() {
         () => [
             {
                 Header: 'First Name',
-                accessor: 'col1',
+                accessor: 'firstName',
             },
             {
                 Header: 'Last Name',
-                accessor: 'col2',
+                accessor: 'lastName',
             },
             {
                 Header: 'Start Date',
-                accessor: 'col3',
+                accessor: 'startDate',
             },
             {
                 Header: 'Department',
-                accessor: 'col4',
+                accessor: 'selectedDepartment',
             },
             {
                 Header: 'Date of Birth',
-                accessor: 'col5',
+                accessor: 'birthDate',
             },
             {
                 Header: 'Street',
-                accessor: 'col6',
+                accessor: 'street',
             },
             {
                 Header: 'City',
-                accessor: 'col7',
+                accessor: 'city',
             },
             {
                 Header: 'State',
-                accessor: 'col8',
+                accessor: 'selectedState',
             },
             {
                 Header: 'Zip Code',
-                accessor: 'col9',
+                accessor: 'zipCode',
             },
         ],
         []
     );
 
     const data = React.useMemo(
-        () => reduxFormat(employeesList),
+        () => tableDataFormat(employeesList),
         [employeesList]
     );
 
