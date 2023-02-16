@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 // react-select
 import Select from 'react-select';
 // picker's data
-import { statesModel } from '../../model/statesModel';
+import { statesModel } from '../../utils/statesModel';
 import { statesData } from '../../data/statesData';
 import { departmentData } from '../../data/departmentData';
 import { ModalComp } from '@morgand/modal-react';
