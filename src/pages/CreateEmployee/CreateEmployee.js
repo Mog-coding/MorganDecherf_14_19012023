@@ -95,9 +95,13 @@ export default function CreateEmployee() {
         setIsSubscribed(false);
     };
 
+    const modalMessage = 'Employee created !';
+
     return (
         <main className="create">
-            {isSubscribed && <ModalComp onClose={closeModal} />}
+            {isSubscribed && (
+                <ModalComp onClose={closeModal} modalContent={modalMessage} />
+            )}
             <h1>Create Employee</h1>
             <form className="create__form" onSubmit={(e) => handleSubmit(e)}>
                 <div className="create__info">
