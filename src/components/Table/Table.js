@@ -7,8 +7,15 @@ import {
 } from 'react-table';
 import './Table.css';
 import sortIcon from '../../assets/icons/sort-solid.svg';
+import PropTypes from 'prop-types';
+
+/**
+ * 
+ * @description component that return table
+ */
 
 export function Table({ columns, data }) {
+
     const props = useTable(
         {
             columns,
@@ -189,3 +196,8 @@ export function Table({ columns, data }) {
         </>
     );
 }
+
+Table.propTypes = {
+    columns: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired
+};

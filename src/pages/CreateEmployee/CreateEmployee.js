@@ -53,6 +53,9 @@ const selectStylesFactorization = {
     }),
 };
 
+/**
+ * @description Page that allows to create employee with form
+ */
 export default function CreateEmployee() {
     const dispatch = useDispatch();
 

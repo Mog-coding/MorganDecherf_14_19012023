@@ -4,6 +4,9 @@ import { Table } from '../../components/Table/Table.js';
 import { useSelector } from 'react-redux';
 import { dateFormat } from '../../utils/dateFormat';
 
+/**
+ * @description Page that display employees in table
+ */
 export default function EmployeeList() {
     const employeesList = useSelector((state) => state.employees);
 

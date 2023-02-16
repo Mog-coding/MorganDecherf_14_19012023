@@ -1,5 +1,8 @@
 import './Home.css';
 
+/**
+ * @description Home Page with Wealth Health logo
+ */
 export default function Home() {
     return (
         <main className="home__main">
