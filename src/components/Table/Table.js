@@ -13,7 +13,6 @@ import PropTypes from 'prop-types';
  * 
  * @description component that return table
  */
-
 export function Table({ columns, data }) {
 
     const props = useTable(
