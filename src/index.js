@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, HashRouter } from 'react-router-dom';
 import CreateEmployee from './pages/CreateEmployee/CreateEmployee';
 import EmployeeList from './pages/EmployeeList/EmployeeList';
 import './index.css';
@@ -20,14 +20,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     //<React.StrictMode>
     <Provider store={store}>
-        <Router>
+        <HashRouter>
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/create" element={<CreateEmployee />} />
                 <Route path="/list" element={<EmployeeList />} />
             </Routes>
-        </Router>
+        </HashRouter>
     </Provider>
     //</React.StrictMode>
 )
