@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { useDispatch } from 'react-redux';
 import { createEmployeeAction } from '../../actions/createEmployeeActions';
 import './CreateEmployee.css';
-// react-datepicker
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-// react-select
-import Select from 'react-select';
+import { ModalComp } from '@morgand/modal-react';
 // picker's data
 import { statesModel } from '../../utils/statesModel';
 import { statesData } from '../../data/statesData';
 import { departmentData } from '../../data/departmentData';
-import { ModalComp } from '@morgand/modal-react';
 
 // react-select options factorization
 const selectStylesFactorization = {
@@ -52,6 +48,9 @@ const selectStylesFactorization = {
         },
     }),
 };
+// dynamic import: react-select, react-datepicker
+const DatePicker = lazy(() => import('react-datepicker'));
+const Select = lazy(() => import('react-select'));
 
 /**
  * @description Page that allows to create employee with form
@@ -65,16 +64,15 @@ export default function CreateEmployee() {
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
     const [zipCode, setZipCode] = useState('');
-    // datePicker
+    // react-datePicker
     const [startDate, setStartDate] = useState('');
     const [birthDate, setBirthDate] = useState('');
-    // reactSelect
+    // react-select
     const [selectedDepartment, setSelectedDepartment] = useState(null);
     const [selectedState, setSelectedState] = useState(null);
     const [isSubscribed, setIsSubscribed] = useState(false);
 
-    // react-select states data
-    const dataStates = statesModel(statesData);
+    const dataSelectStates = statesModel(statesData);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -133,35 +131,41 @@ export default function CreateEmployee() {
                     />
                     <div className="create__info__datePicker">
                         <label className="create__label">Date of Birth</label>
-                        <DatePicker
-                            selected={birthDate}
-                            onChange={(date) => setBirthDate(date)}
-                            className="datePickerCustom"
-                            placeholderText={'Click to select a date'}
-                        />
+                        <Suspense fallback="Loading">
+                            <DatePicker
+                                selected={birthDate}
+                                onChange={(date) => setBirthDate(date)}
+                                className="datePickerCustom"
+                                placeholderText={'Click to select a date'}
+                            />
+                        </Suspense>
                     </div>
                     <label htmlFor="start-date" className="create__label">
                         Start Date
                     </label>
-                    <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        className="datePickerCustom"
-                        placeholderText={'Click to select a date'}
-                    />
+                    <Suspense fallback="Loading">
+                        <DatePicker
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                            className="datePickerCustom"
+                            placeholderText={'Click to select a date'}
+                        />
+                    </Suspense>
                     <div className="create__info__department">
                         <label htmlFor="department" className="create__label">
                             Department
                         </label>
-                        <Select
-                            defaultValue={selectedDepartment}
-                            onChange={setSelectedDepartment}
-                            options={departmentData}
-                            placeholder="Click to select a state"
-                            menuPosition="fixed"
-                            menuPlacement="auto"
-                            styles={selectStylesFactorization}
-                        />
+                        <Suspense fallback="Loading">
+                            <Select
+                                defaultValue={selectedDepartment}
+                                onChange={setSelectedDepartment}
+                                options={departmentData}
+                                placeholder="Click to select a state"
+                                menuPosition="fixed"
+                                menuPlacement="auto"
+                                styles={selectStylesFactorization}
+                            />
+                        </Suspense>
                     </div>
                 </div>
 
@@ -190,15 +194,17 @@ export default function CreateEmployee() {
                     <label htmlFor="state" className="create__label">
                         State
                     </label>
-                    <Select
-                        defaultValue={selectedState}
-                        onChange={setSelectedState}
-                        options={dataStates}
-                        placeholder="Click to select a state"
-                        menuPosition="fixed"
-                        menuPlacement="auto"
-                        styles={selectStylesFactorization}
-                    />
+                    <Suspense fallback="Loading">
+                        <Select
+                            defaultValue={selectedState}
+                            onChange={setSelectedState}
+                            options={dataSelectStates}
+                            placeholder="Click to select a state"
+                            menuPosition="fixed"
+                            menuPlacement="auto"
+                            styles={selectStylesFactorization}
+                        />
+                    </Suspense>
                     <label htmlFor="zip-code" className="create__label">
                         Zip Code
                     </label>
