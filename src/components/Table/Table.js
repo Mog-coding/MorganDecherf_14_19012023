@@ -66,7 +66,7 @@ export function Table({ columns, data }) {
                         ))}
                     </select>
                     <div>
-                        <label htmlFor="search">Search</label>
+                        <label htmlFor="search">Search </label>
                         <input
                             id="search"
                             className="tableCont__input"
@@ -170,7 +170,7 @@ export function Table({ columns, data }) {
                                 }}
                                 style={{ width: '50px' }}
                             />
-                        </span>
+                        </span>{' '}
                         <button
                             onClick={() => nextPage()}
                             disabled={!canNextPage}
@@ -186,7 +186,7 @@ export function Table({ columns, data }) {
                         <span>
                             Page{' '}
                             <strong>
-                                {pageIndex + 1} of {pageOptions.length}
+                                {pageIndex + 1} of {pageOptions.length === 0 ? 1 : pageOptions.length}
                             </strong>{' '}
                         </span>
                     </p>

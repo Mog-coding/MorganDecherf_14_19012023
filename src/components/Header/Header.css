@@ -25,6 +25,7 @@
 }
 .header__logo__img {
     width: 60px;
+    height: 60px;
 }
 .header__logo__title {
     font-size: 1em;

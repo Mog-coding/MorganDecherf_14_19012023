@@ -5,6 +5,7 @@
     padding: 30px;
     background-color: var(--secondary-color);
     border-radius: 20px;
+    box-shadow: 0px 5px 15px grey;
 }
 .tableCont__table {
     border-collapse: collapse;
