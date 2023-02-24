@@ -35,6 +35,8 @@
 }
 .tableCont__sortIcon {
     filter: invert(41%) sepia(4%) saturate(8%) hue-rotate(5deg) brightness(92%) contrast(90%);
+    width: 15px;
+    height: 15px;
 }
 .tableCont__empty {
     text-align: center;
