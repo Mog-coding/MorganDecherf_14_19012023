@@ -136,6 +136,8 @@ export default function CreateEmployee() {
                                 onChange={(date) => setBirthDate(date)}
                                 className="datePickerCustom"
                                 placeholderText={'Click to select a date'}
+                                showYearDropdown
+                                dropdownMode="select"
                             />
                     </div>
                     <label htmlFor="start-date" className="create__label">
@@ -146,6 +148,8 @@ export default function CreateEmployee() {
                             onChange={(date) => setStartDate(date)}
                             className="datePickerCustom"
                             placeholderText={'Click to select a date'}
+                            showYearDropdown
+                            dropdownMode="select"
                         />
                     <div className="create__info__department">
                         <label htmlFor="department" className="create__label">
